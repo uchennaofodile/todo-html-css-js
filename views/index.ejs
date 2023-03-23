@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../public/main.css">
+    <link rel="icon"
+    href="../public/Icons8-Windows-8-Very-Basic-Checkmark.512.png">
+    <style>
+        body {
+            background-color: #ddd
+        }
+    </style>
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="../public/main.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Todo</title>
+</head>
+
+<body style="height: 750px;" class=" mt-4 p-5">
+    <div class=" shadow-lg h-100 row border rounded-3" style="background-color: white;">
+        <div class=" h-100 col-sm-3 rounded-3 text-bg-light border-end text-black-50  text-center" id="main-body">
+            <h1 class="display-1 pt-3">Todo</h1>
+            <!-- <div class="container-sm pt-4 text-center text-black-50 text-bg-light" id="header">
+                <h1 class="display-5"></h1>
+                <div id="parent">
+                    <button class="form-control" id="login">Login</button>
+                    <a class="text-decoration-none text-start" href="/register">Register</a>
+                </div>
+                <br> -->
+
+                <!-- <div class="row">
+        <div class="col-sm-3"><a class="text-decoration-none" href="#"><h6><small>About</small></h6></a></div>
+        <div class="col-sm-3 "><a class="text-decoration-none" href="#"><h6><small>Help</small></h6></a></div>
+        <div class="col-sm-3"><a class="text-decoration-none" href="#"><h6><small>Contact</small></h6></a></div>
+    </div> -->
+
+
+                <!-- <ul class="nav nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Help</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+
+            </ul> -->
+            <br>
+            <div class="dropdown">
+                <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                  Menu
+                </button>
+                <ul class="dropdown-menu">
+                  
+                  <li><a class="dropdown-item" href="/login">Login</a></li>
+                  <li><a class="dropdown-item" href="/register">Register</a><li>
+                  <!-- <li><a class="dropdown-item" href="/help">Help</a></li> -->
+                </ul>
+              </div>
+            </div>
+        </div>
+
+      
+
+        
+
+        
+    </div>
+   
+        <div class=" h-5 rounded-3" style="background-color: #5b5fc7;">
+        </div>
+
+
+    
+    <script>
+        //create a new node
+        const button = document.getElementById('login');
+        
+        //create a new node
+        const header = document.getElementById('div');
+        
+        //create a new node
+        const parent = document.getElementById('parent');
+        
+        //creating the Login form
+        const formForLogin = document.createElement('form');
+        
+        //creating the chatUi
+        const chatUi = document.createElement('form');
+        
+        //creating the messages window
+        const messageWindow = document.createElement('div');
+        
+        messageWindow.setAttribute('class', 'col-sm-9');
+        
+        //creating send button
+        // const sendButton = document.createElement('button');
+        // sendButton.innerHTML = 'Send';
+        
+        // sendButton.addEventListener('Click', () => {
+        //     chatUi.appendChild(sendButton);
+        // })
+
+
+        //filling th chatUi
+        chatUi.innerHTML += '<textarea  placeholder="Add something new" class="container rounded-4 border border-0" id="message-input"></textarea><input id="send" class="form-control" type="submit">'
+      
+        //getting text area
+        const messageInput = chatUi.querySelector('#message-input');
+
+        //getting submit button
+        const sendButton = chatUi.querySelector('#send');
+
+
+        //initializa an array to store the messages    
+        const messages = [];
+
+        //Used to add todo list items to messageBoard
+        sendButton.addEventListener('click', (e)=>{
+
+            e.preventDefault();
+            addItem();
+    //     const messageText = messageInput.value;
+    //     messages.push(messageText);//add to array
+    //     // Log the new text to the console
+    //     const newLi = document.createElement('li');
+    //     newLi.textContent = messageText;
+    //     //messageWindow.insertAdjacentElement('afterbegin', newLi);
+    //     messageWindow.appendChild(newLi);
+    //     newLi.addEventListener('click',()=>{
+        
+    //     let message = newLi.textContent;
+
+    //     for(let i = 0; i<messages.length; i++){
+    //         if(messages[i]===message){
+    //             messages.splice(i,1);// remove the message from the array
+    //             break;
+    //         }
+    //     }
+    //     //removes elements that we click on
+    //     if(newLi!==null){
+    //         messageWindow.removeChild(newLi)
+    //         console.clear(); //clear the console log
+    //         messages.forEach((msg)=>{
+    //         console.log(msg);
+    //         })
+    //     }
+    
+    
+    
+    // })
+    // messageInput.value='';//clear the input field
+        })
+
+        function addItem() {
+  const messageText = messageInput.value.trim();
+  if (messageText !== '') {
+    messages.push(messageText);//add to array
+    // Log the new text to the console
+    const newLi = document.createElement('li');
+    newLi.textContent = messageText;
+    //messageWindow.insertAdjacentElement('afterbegin', newLi);
+    messageWindow.appendChild(newLi);
+    newLi.addEventListener('click',()=>{
+      let message = newLi.textContent;
+      for(let i = 0; i<messages.length; i++){
+        if(messages[i]===message){
+          messages.splice(i,1);// remove the message from the array
+          break;
+        }
+      }
+      //removes elements that we click on
+      if(newLi!==null){
+        messageWindow.removeChild(newLi)
+        console.clear(); //clear the console log
+        messages.forEach((msg)=>{
+          console.log(msg);
+        })
+      }
+    })
+    messageInput.value='';//clear the input field
+  }
+}
+        //functionality for enter key
+        messageInput.addEventListener('keydown', (e) => {
+  if (e.keyCode === 13 && e.shiftKey === false) {
+    e.preventDefault();
+    addItem();
+  }
+});
+
+// Add an event listener to the message input element
+// messageInput.addEventListener('input', () => {
+//   // Retrieve the new text from the message input element
+//   const messageText = messageInput.value;
+
+//   // Log the new text to the console
+//   const newLi = document.createElement('li');
+//     newLi.textContent = messageText;
+//     //messageWindow.insertAdjacentElement('afterbegin', newLi);
+//     messageWindow.appendChild(newLi);
+//   console.log(messageText);
+// });
+        //getting current date
+        const currentDate = new Date();
+        const formattedDate = currentDate.toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'});
+        //populate our div
+        // messageWindow.innerHTML += '<div style="background-color:white" class="mt-4 p-5 col-sm-9 container rounded">Message Window<div><button class="form-control rounded">Send</button></div></div>'
+        messageWindow.innerHTML += '<div style="background-color:white" class="mt-4 p-5 col-sm-9 container rounded"><div class="display-3">'+formattedDate+'</div></div>'
+        
+
+        //add some items to our list
+        // Create a new li element
+
+
+// Insert the new li element into the messageWindow element
+//messageWindow.insertAdjacentElement('afterbegin', newLi);
+// for (let index = 0; index < 4; index++) {
+//     const newLi = document.createElement('li');
+//     newLi.textContent = 'HTML';
+//     //messageWindow.insertAdjacentElement('afterbegin', newLi);
+//     messageWindow.appendChild(newLi);
+    
+// }
+
+
+       
+        
+        //const registerUrl = '/register';
+        
+        //filling the login form
+        formForLogin.innerHTML += '<div class="container-sm-4 was-validated" id="loginForm"><form action="/login" method="POST"><label class="form-label" for="email" required>Email:</label><input class="form-control" type="text" id="email" name="email" placeholder="Email" onblur="validateEmail(this.value)" required><div class="valid-feedback"></div><br><label class="form-label" for="password" required>Password:</label><input class="form-control"  type="text" id="password" name="password" placeholder="Password" required><div class="valid-feedback"></div><br><input class="form-control"  id="userSubmit" type="submit" placeholder="Submit"></div></form>'
+        
+        
+        //create a new node
+        const divForLogin = document.getElementById('loginForm');
+        
+        //create a new node 
+        const mainBody = document.getElementById('main-body');
+        
+        //create a new node
+        // const messageButton = document.getElementById('send');
+        
+        // messageButton.addEventListener('click', ()=>{console.log('Message Sent');})
+        
+        
+        //method to add message window
+        const addMessageWindow = () => {
+            mainBody.appendChild(messageWindow);
+        
+        }
+        
+        //validating email
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+        
+        //Login function
+        const replaceLoginButton = () => {
+            parent.replaceChild(formForLogin, button);
+            button.removeEventListener('click', replaceLoginButton);
+        
+        }
+        
+        //Proceed to chat
+        const replaceSubmitButton = () => {
+            parent.replaceChild(chatUi, formForLogin);
+            mainBody.after(messageWindow);
+            formForLogin.removeEventListener('submit', replaceSubmitButton);
+        }
+        
+        //button.addEventListener('click', (e) => { console.log('clicked') });
+        button.addEventListener('click', replaceLoginButton);
+        
+        
+        // messageWindow.style.width='300px';
+        // messageWindow.style.height='200px';
+        // messageWindow.style.backgroundColor = '#f2f2f2';
+        
+        
+        
+        
+        //const userSubmit = document.getElementById('userSubmit');
+        
+        formForLogin.addEventListener('submit', replaceSubmitButton);
+        
+        //messageWindow.addEventListener('click', addMessageWindow);
+        
+        //userSubmit.addEventListener('click', ()=>{location.replace("./chatui.html")})
+        
+        //formForLogin.addEventListener('submit', (e)=>{e.preventDefault();})
+        
+        </script>
+        <h6 class="font-weight-light text-black-50"><small><%= name %></small></h6>
+        
+</body>
+
+</html>
