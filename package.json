@@ -4,8 +4,8 @@
   "description": "A chat application",
   "main": "index.html",
   "scripts": {
-    "dev": "nodemon server.js",
-    "start": "node index.html"
+    "dev": "nodemon index.ejs",
+    "start": "node index.ejs"
   },
   "repository": {
     "type": "git",
